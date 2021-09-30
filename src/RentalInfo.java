@@ -22,6 +22,14 @@ public class RentalInfo {
     return amountHashMap;
   }
 
+  public static HashMap<MovieCategory, IBonus> movieCategoryBonus() {
+    HashMap<MovieCategory, IBonus> bonusesHashMap = new HashMap<>();
+    bonusesHashMap.put(MovieCategory.REGULAR, new RegularMovieAmount());
+    bonusesHashMap.put(MovieCategory.CHILDRENS, new ChildrenMovieAmount());
+    bonusesHashMap.put(MovieCategory.NEW, new NewMovieAmount());
+
+    return bonusesHashMap;
+  }
 
   public String statement(Customer customer) {
 
@@ -34,9 +42,7 @@ public class RentalInfo {
       double thisAmount = movieCategoryAmount().get(generateMovies().get(rental.getMovieId()).getCategory()).getAmount(rental.getDays());
 
       //add frequent bonus points
-      frequentEnterPoints++;
-      // add bonus for a two day new release rental
-      if (generateMovies().get(rental.getMovieId()).getCategory() == MovieCategory.NEW && rental.getDays() > 2) frequentEnterPoints++;
+      frequentEnterPoints += movieCategoryBonus().get(generateMovies().get(rental.getMovieId()).getCategory()).bonus(rental.getDays());
 
       //print figures for this rental
       result += "\t" + generateMovies().get(rental.getMovieId()).getTitle() + "\t" + thisAmount + "\n";
