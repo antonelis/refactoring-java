@@ -2,12 +2,20 @@ import java.util.HashMap;
 
 public class RentalInfo {
 
-  public String statement(Customer customer) {
-    HashMap<String, Movie> movies = new HashMap();
+  public static HashMap<String, Movie> generateMovies() {
+
+    HashMap<String, Movie> movies = new HashMap<>();
     movies.put("F001", new Movie("You've Got Mail", MovieCategory.REGULAR));
     movies.put("F002", new Movie("Matrix", MovieCategory.REGULAR));
     movies.put("F003", new Movie("Cars", MovieCategory.CHILDRENS));
     movies.put("F004", new Movie("Fast & Furious X", MovieCategory.NEW));
+
+    return movies;
+  }
+
+
+  public String statement(Customer customer) {
+
 
     double totalAmount = 0;
     int frequentEnterPoints = 0;
@@ -16,16 +24,16 @@ public class RentalInfo {
       double thisAmount = 0;
 
       // determine amount for each movie
-      if (movies.get(r.getMovieId()).getCategory().equals(MovieCategory.REGULAR)) {
+      if (generateMovies().get(r.getMovieId()).getCategory().equals(MovieCategory.REGULAR)) {
         thisAmount = 2;
         if (r.getDays() > 2) {
           thisAmount = ((r.getDays() - 2) * 1.5) + thisAmount;
         }
       }
-      if (movies.get(r.getMovieId()).getCategory().equals(MovieCategory.NEW)) {
+      if (generateMovies().get(r.getMovieId()).getCategory().equals(MovieCategory.NEW)) {
         thisAmount = r.getDays() * 3;
       }
-      if (movies.get(r.getMovieId()).getCategory().equals(MovieCategory.CHILDRENS)) {
+      if (generateMovies().get(r.getMovieId()).getCategory().equals(MovieCategory.CHILDRENS)) {
         thisAmount = 1.5;
         if (r.getDays() > 3) {
           thisAmount = ((r.getDays() - 3) * 1.5) + thisAmount;
@@ -35,10 +43,10 @@ public class RentalInfo {
       //add frequent bonus points
       frequentEnterPoints++;
       // add bonus for a two day new release rental
-      if (movies.get(r.getMovieId()).getCategory() == MovieCategory.NEW && r.getDays() > 2) frequentEnterPoints++;
+      if (generateMovies().get(r.getMovieId()).getCategory() == MovieCategory.NEW && r.getDays() > 2) frequentEnterPoints++;
 
       //print figures for this rental
-      result += "\t" + movies.get(r.getMovieId()).getTitle() + "\t" + thisAmount + "\n";
+      result += "\t" + generateMovies().get(r.getMovieId()).getTitle() + "\t" + thisAmount + "\n";
       totalAmount = totalAmount + thisAmount;
     }
     // add footer lines
