@@ -1,3 +1,8 @@
+import domain.Customer;
+import domain.MovieRental;
+import exception.AssertionErrorException;
+import service.RentalInfo;
+
 import java.util.Arrays;
 
 public class Main {

@@ -1,3 +1,5 @@
+package amount;
+
 public class ChildrenMovieAmount implements IAmount, IBonus {
     @Override
     public double getAmount(int day) {

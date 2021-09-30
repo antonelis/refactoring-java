@@ -1,4 +1,9 @@
-public class NewMovieAmount implements IAmount, IBonus{
+package amount;
+
+import amount.IAmount;
+import amount.IBonus;
+
+public class NewMovieAmount implements IAmount, IBonus {
     @Override
     public double getAmount(int day) {
         return day * 3;

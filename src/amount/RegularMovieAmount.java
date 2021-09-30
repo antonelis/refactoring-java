@@ -1,3 +1,8 @@
+package amount;
+
+import amount.IAmount;
+import amount.IBonus;
+
 public class RegularMovieAmount implements IAmount, IBonus {
 
     @Override

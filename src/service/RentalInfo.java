@@ -1,8 +1,16 @@
+package service;
+
+import amount.*;
+import domain.Customer;
+import domain.Movie;
+import domain.MovieCategory;
+import domain.MovieRental;
+
 import java.util.HashMap;
 
 public class RentalInfo {
 
-    public static HashMap<String, Movie> generateMovies() {
+    private static HashMap<String, Movie> generateMovies() {
 
         HashMap<String, Movie> movies = new HashMap<>();
         movies.put("F001", new Movie("You've Got Mail", MovieCategory.REGULAR));
@@ -13,7 +21,7 @@ public class RentalInfo {
         return movies;
     }
 
-    public static HashMap<MovieCategory, IAmount> movieCategoryAmount() {
+    private static HashMap<MovieCategory, IAmount> movieCategoryAmount() {
         HashMap<MovieCategory, IAmount> amountHashMap = new HashMap<>();
         amountHashMap.put(MovieCategory.REGULAR, new RegularMovieAmount());
         amountHashMap.put(MovieCategory.CHILDRENS, new ChildrenMovieAmount());
@@ -22,7 +30,7 @@ public class RentalInfo {
         return amountHashMap;
     }
 
-    public static HashMap<MovieCategory, IBonus> movieCategoryBonus() {
+    private static HashMap<MovieCategory, IBonus> movieCategoryBonus() {
         HashMap<MovieCategory, IBonus> bonusesHashMap = new HashMap<>();
         bonusesHashMap.put(MovieCategory.REGULAR, new RegularMovieAmount());
         bonusesHashMap.put(MovieCategory.CHILDRENS, new ChildrenMovieAmount());
